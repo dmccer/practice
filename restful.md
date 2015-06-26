@@ -43,3 +43,28 @@
 
 
 ## 服务型资源
+
+* 生效订单：
+
+		// 用户提交订单需要运营补充信息并审核通过才会正式生效
+		PUT /orders/:order_id/validation
+		Payload:
+		{
+			"memo": "女性用户"
+		}
+
+
+## 关系型资源
+
+* 添加商品到订单
+
+		POST /orders/:order_id/wares
+		Payload:
+		{
+			ware_id: 1
+		}
+
+
+* 删除订单中的某一商品
+
+		DELETE /orders/:order_id/wares/:ware_id
