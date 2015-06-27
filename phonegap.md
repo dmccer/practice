@@ -32,8 +32,36 @@
 * `cordova plugin add git@github.com:keensoft/FullScreenImage-Cordova-Plugin.git`
 
 ## 自定义 hook 获取静态包
+	
+	# 使用 shelljs 包装下面两条命令
+	curl http://d.example.com/fe/project_name/0.0.1.tar.gz > ./www.tar.gz
+	tar zxvf ./www.tar.gz
 
 ## 生成签名并加入配置，自动发布
+
+1. 生成 keystore
+	
+		# 进入您想要保存 keystore 文件的目录
+		cd /Users/kane/work 
+		keytool -genkey -alias test.keystore -keyalg RSA -validity 10000 -keystore test.keystore
+	
+	* -genkey: 产生密钥
+	* -alias test.keystore: 别名 test.keystore
+	* -keyalg RSA: 使用 RSA 算法对签名加密
+	* -validity 10000: 证书有效天数 10000
+	* -keystore demo.keystore: keystore 的文件名
+	* 国家代码: CN 表示中国
+
+
+2. 加入 phonegap build 配置
+
+	在 `inspector-app/platforms/android/` 目录中创建 `ant.properties` 文件并输入下面内容:
+	
+		key.store=/Users/kane/work
+		key.alias=test.keystore
+		key.store.password=xxxxxxx
+		key.alias.password=xxxxxxx
+
 
 ## 踩到的坑
 
