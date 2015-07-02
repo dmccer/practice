@@ -62,6 +62,9 @@
 		key.store.password=xxxxxxx
 		key.alias.password=xxxxxxx
 
+## 调试
+
+1. chrome 调试 android, chrome 地址栏输入 `chrome://inspect`, 然后选择 `Devices`；android 设备开启 USB 调试
 
 ## 踩到的坑
 
@@ -76,3 +79,14 @@
 3. MX4 USB 调试，ADB 无法识别
 
 	将 0x2a45 添加到文件 ~/.android/adb_usb.ini 末尾
+
+4. 小米平板和手机打开开发者模式与开启 USB 调试
+
+	* 设置 -> 关于平板/手机 -> 连续点击 `MIUI 版本`
+	
+	* 其他高级设置 -> 开发者选项 -> USB 调试  
+	
+5. 更换应用图标不更新
+
+	重启手机或平板
+	
