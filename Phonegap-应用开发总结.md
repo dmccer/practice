@@ -90,3 +90,8 @@
 
 	重启手机或平板
 	
+6. Phonegap 页面中播放音频文件
+
+	* 使用 cordova 插件 `org.apache.cordova.media`
+	
+	* 使用 audio 标签，文件地址必须使用绝对地址
