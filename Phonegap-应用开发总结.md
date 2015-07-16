@@ -94,4 +94,6 @@
 
 	* 使用 cordova 插件 `org.apache.cordova.media`
 	
-	* 使用 audio 标签，文件地址必须使用绝对地址
+	* 使用 audio 标签，file 协议不可用，可以使用 http 或 https
+
+7. Phonegap hook 文件需要执行权限，否则 cordova build 会失败
