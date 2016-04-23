@@ -105,22 +105,29 @@
     };
   }
 
-  if (typeof col !== 'number') {
-    tiper('请输入第几列');
+  function start() {
+    if (typeof col !== 'number') {
+      tiper('请输入第几列');
 
-    return;
+      return;
+    }
+
+    var all = countAll();
+    var r = all.ret[col - 1];
+    var taskPercentage = Math.round(r.count/all.count * 100);
+    var hourPercentage = Math.round(r.total/all.total * 100);
+    var maxTaskPercentage = Math.round(all.max.count/all.count * 100);
+    var maxHourPercentage = Math.round(all.max.total/all.total * 100);
+
+    tiper(
+      `
+      "${r.title}" 的 Task 总数: ${r.count}个(${taskPercentage}%), 总时长: ${r.total}h(${hourPercentage}%)\n
+      本期 Task 总数: ${all.count}个, 总时长: ${all.total}h\n
+      MVP 是 "${all.max.title}" 共 ${all.max.count}个(${maxTaskPercentage}%) Task, 耗时 ${all.max.total}h(${maxHourPercentage}%)
+      `
+    );
   }
 
-  var all = countAll();
-  var r = all.ret[col - 1];
-  var taskPercentage = Math.round(r.count/all.count * 100);
-  var hourPercentage = Math.round(r.total/all.total * 100);
-  var maxTaskPercentage = Math.round(all.max.count/all.count * 100);
-  var maxHourPercentage = Math.round(all.max.total/all.total * 100);
+  start();
 
-  tiper(`
-"${r.title}" 的 Task 总数: ${r.count}个(${taskPercentage}%), 总时长: ${r.total}h(${hourPercentage}%)\n
-本期 Task 总数: ${all.count}个, 总时长: ${all.total}h\n
-MVP 是 "${all.max.title}" 共 ${all.max.count}个(${maxTaskPercentage}%) Task, 耗时 ${all.max.total}h(${maxHourPercentage}%)
-    `);
 })(n=1);
