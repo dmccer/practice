@@ -13,13 +13,13 @@
  */
 
 (function(col) {
-  var picker = function() {
+  var picker = (function() {
     // 2h
     var REG_CASE_1 = /(\d+)h?/;
     // 2h*3
     var REG_CASE_2 = /(\d+)h?\*(\d+)/;
 
-    return function (s) {
+    return function(s) {
       var mc = s.match(REG_CASE_2);
       if (mc && mc.length && mc.length === 3) {
         return parseInt(mc[1]) * parseInt(mc[2]);
@@ -39,7 +39,7 @@
         return parseInt(m[0]);
       }
     };
-  }();
+  })();
 
   function tiper(msg) {
     console.log(msg);
@@ -47,15 +47,17 @@
   }
 
   function countAll() {
-    var $cols = $('.ui-sortable');
+    var $cols = $(".ui-sortable");
     var ret = [];
 
-    $cols.each(function (index) {
+    $cols.each(function(index) {
       var r = countCol(index);
       ret.push(r);
     });
 
-    var total = 0, count = 0, max = ret[0];
+    var total = 0,
+      count = 0,
+      max = ret[0];
     ret.forEach(function(r) {
       total += r.total;
       count += r.count;
@@ -74,10 +76,11 @@
   }
 
   function countCol(col) {
-    var $cols = $('.ui-sortable');
+    var $cols = $(".ui-sortable");
     var $col = $cols.eq(col);
-    var $raws = $col.find('.todo .raw');
-    var hours = [], total = 0;
+    var $raws = $col.find(".todo .raw");
+    var hours = [],
+      total = 0;
 
     $raws.each(function() {
       var s = $(this).text();
@@ -95,7 +98,7 @@
     }
 
     // 列的标题
-    var title = $.trim($('.title .name', $col).text()).replace(/\n/g, '');
+    var title = $.trim($(".title .name", $col).text()).replace(/\n/g, "");
 
     return {
       title: title,
@@ -106,28 +109,33 @@
   }
 
   function start() {
-    if (typeof col !== 'number') {
-      tiper('请输入第几列');
+    if (typeof col !== "number") {
+      tiper("请输入第几列");
 
       return;
     }
 
     var all = countAll();
     var r = all.ret[col - 1];
-    var taskPercentage = Math.round(r.count/all.count * 100);
-    var hourPercentage = Math.round(r.total/all.total * 100);
-    var maxTaskPercentage = Math.round(all.max.count/all.count * 100);
-    var maxHourPercentage = Math.round(all.max.total/all.total * 100);
+    var taskPercentage = Math.round((r.count / all.count) * 100);
+    var hourPercentage = Math.round((r.total / all.total) * 100);
+    var maxTaskPercentage = Math.round((all.max.count / all.count) * 100);
+    var maxHourPercentage = Math.round((all.max.total / all.total) * 100);
 
     tiper(
       `
-      "${r.title}" 的 Task 总数: ${r.count}个(${taskPercentage}%), 总时长: ${r.total}h(${hourPercentage}%)\n
+      "${r.title}" 的 Task 总数: ${r.count}个(${taskPercentage}%), 总时长: ${
+        r.total
+      }h(${hourPercentage}%)\n
       本期 Task 总数: ${all.count}个, 总时长: ${all.total}h\n
-      MVP 是 "${all.max.title}" 共 ${all.max.count}个(${maxTaskPercentage}%) Task, 耗时 ${all.max.total}h(${maxHourPercentage}%)
+      MVP 是 "${all.max.title}" 共 ${
+        all.max.count
+      }个(${maxTaskPercentage}%) Task, 耗时 ${
+        all.max.total
+      }h(${maxHourPercentage}%)
       `
     );
   }
 
   start();
-
-})(n=1);
+})((n = 1));

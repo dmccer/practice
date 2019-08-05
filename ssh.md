@@ -4,13 +4,13 @@
 
 1. 登录远程服务器
 
-   * ```bash
+   - ```bash
      ssh -p 2222 user@ip
      ```
 
 2. 上传文件到远程服务器
 
-   * ```bash
+   - ```bash
      # 上传单个文件
      scp -P 2222 /local_path/xxx.tar.gz user@ip:/remote_path
      # 上传多个文件
@@ -21,7 +21,7 @@
 
 3. 从远程服务器下载文件
 
-   * ```bash
+   - ```bash
      # 下载单个文件
      scp -P 2222 user@ip:/remote_path/xxx.tar.gz /local_path
      # 下载多个文件
@@ -34,7 +34,7 @@
 
 1. 免密登录远程服务器
 
-   * `SSH` 公钥登录
+   - `SSH` 公钥登录
 
      1. 客户端上生成
 
@@ -60,13 +60,13 @@
 
         ```bash
         ssh user@ip
-        
+
         # 如果不能，客户端使用 debug 方式连接，查看验证信息
         ssh -v user@ip
-        
+
         # 服务端可以查看 /var/log/secure 文件，寻找失败原因
         cat /var/log/secure
-        
+
         # 常见原因 bad ownership or modes for directory…
         # SSH公钥认证必须设置合适的权限:
         # `.ssh` 目录的权限为 700
@@ -74,11 +74,24 @@
         chmod 700 ~/.ssh
         ```
 
-   * `expect` 脚本
-   * 
+   - [`expect` 脚本](http://xstarcd.github.io/wiki/shell/expect.html)
 
 2. 远程执行命令
 
+   - 直接执行
+
+   ```bash
+   # 在服务器创建目录 /home/test
+   ssh user@ip mkdir -p /home/test
+   ```
+
+   - 运行脚本
+
+   ```bash
+   # 运行服务器指定目录下的 bash 脚本，并传入参数
+   ssh user@ip /home/test/scripts/deploy.sh arg1 arg2
+   ```
+
 ## 实用工具
 
-* SecureCRT + SecureFX
+- SecureCRT + SecureFX
